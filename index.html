@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+  <style>
+        :root {
+      --white: #FFFFFF;
+      --black: #000000;
+      --very-light-pink: #ececec;
+      --text-input-field: #F7F7F7;
+      --hospital-green: #d9739c;
+      --sm: 14px;
+      --md: 16px;
+      --lg: 18px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #84d69f;
+    }
+    .login {
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+    .form-container {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      width: 90vh;
+    }
+    .logo {
+      width: 150px;
+      margin-bottom: 48px;
+      justify-self: center;
+      display: none;
+    }
+    .title {
+      font-size: var(--lg);
+      margin-bottom: 22px;
+      text-align: start;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
+    .form div{
+        display: flex;
+        flex-direction: column;
+    }
+    .label {
+      font-size: var(--sm);
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .input {
+      background-color: var(--text-input-field);
+      border: none;
+      border-radius: 8px;
+      height: 30px;
+      font-size: var(--md);
+      padding: 6px;
+      margin-bottom: 12px;
+    }
+    .input-name, .input-email, .input-password {
+        margin-bottom: 22px;
+    }
+    .primary-button {
+      background-color: var(--hospital-green);
+      border-radius: 8px;
+      border: none;
+      color: var(--white);
+      width: 100%;
+      cursor: pointer;
+      font-size: var(--md);
+      font-weight: bold;
+      height: 50px;
+    }
+    .login-button {
+      margin-top: 14px;
+      margin-bottom: 30px;
+    }
+    .oficina {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            align-items: center; /* Alinear los elementos verticalmente */
+            margin-top: 12px;
+        }
+
+        /* Estilos para los campos de medidas */
+        .oficina label {
+            font-size: var(--sm);
+            font-weight: bold;
+            margin-bottom: 4px;
+            align-self: center;
+        }
+
+        .oficina input {
+            background-color: var(--text-input-field);
+            border: none;
+            border-radius: 8px;
+            height: 30px;
+            font-size: var(--md);
+            padding: 6px;
+        }
+
+        /* Estilos para los campos de medidas de ancho, largo y alto */
+        .medida-input {
+            grid-column: 1; /* Alinear en la primera columna del grid */
+        }
+
+        /* Estilos adicionales */
+        .oficina p {
+            margin-top: 12px;
+            font-size: var(--sm);
+        }
+
+    @media (max-width: 640px) {
+      .logo {
+        display: block;
+      }
+      .form-container{
+          height: 100%;
+      }
+      .form{
+          height: 100%;
+          justify-content: space-between;
+      }
+    }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <div class="form-container">
+            <h1 class="title">Este formulario nos permitira realizar parte de la planeación de la instalación de Anexo 30 para la estación</h1>
+            <p style="text-align: center;">Por favor ingrese las medidas en Metros</p>
+            
+            <form action="/" class="form">
+                <div>
+                    <label for="EST" class="label">Número de Estación</label>
+                    <input type="text" id="EST" placeholder="No. estación" class="input input-name" pattern="[0-9]{1,5}" title="Ingresa un número de hasta 5 dígitos">
+
+                    <label for="Rack" class="label">¿La estación adquirió Rack?</label>
+                    <select id="Rack" class="input">
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+
+                    <p>
+                        Ahora comenzaremos con las medidas para las oficinas, por favor ingrese el número de oficinas que cuentan con equipos de computo(Estos equipos de computo deberán considerarse SOLO si tienen el aplicativo EGasAdmin o algún otro programa de la Suite)
+                    </p>
+                    <label for="numOficinas" class="label">Número de oficinas con equipos de computo:</label>
+                    <input type="number" id="numOficinas" min="1" max="9" class="input">
+                    <button class="primary-button" onclick="crearCamposOficinas()">Continuar</button>
+
+
+                    <div id="oficinasContainer"></div>
+                    <br>
+                    <label for="tablaroca" class="label">¿La estación tiene paredes de Tablaroca?</label>
+                    <select id="tablaroca" class="input">
+                        <option value="si">Sí</option>
+                        <option value="no">No</option>
+                    </select>
+
+                    <div class="oficina">
+                        <label for="distanciaSmartLink" class="label">Distancia desde el servidor hasta el SmartLink:</label>
+                        <input type="number" id="distanciaSmartLink" class="input medida-input">
+                    </div>
+                
+                    <div class="oficina">
+                        <label for="distanciaVeederRoot" class="label">Distancia desde el servidor al Veeder-Root:</label>
+                        <input type="number" id="distanciaVeederRoot" class="input medida-input">
+                    </div>
+                    
+                </div>
+                <br>
+                <input type="submit" value="Enviar" class="primary-button login-buttom">
+                <br>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        function crearCamposOficinas() {
+            var numOficinas = parseInt(document.getElementById("numOficinas").value);
+            var container = document.getElementById("oficinasContainer");
+            container.innerHTML = ''; // Limpiar el contenido anterior
+    
+            for (var i = 1; i <= numOficinas; i++) {
+                var oficinaDiv = document.createElement("div");
+                oficinaDiv.className = "oficina";
+    
+                var labelAncho = document.createElement("label");
+                labelAncho.textContent = "Oficina No " + i + " - Ancho:";
+                var inputAncho = document.createElement("input");
+                inputAncho.type = "number";
+    
+                var labelLargo = document.createElement("label");
+                labelLargo.textContent = "Oficina No " + i + " - Largo:";
+                var inputLargo = document.createElement("input");
+                inputLargo.type = "number";
+    
+                var labelAlto = document.createElement("label");
+                labelAlto.textContent = "Oficina No " + i + " - Alto:";
+                var inputAlto = document.createElement("input");
+                inputAlto.type = "number";
+    
+                oficinaDiv.appendChild(labelAncho);
+                oficinaDiv.appendChild(inputAncho);
+                oficinaDiv.appendChild(labelLargo);
+                oficinaDiv.appendChild(inputLargo);
+                oficinaDiv.appendChild(labelAlto);
+                oficinaDiv.appendChild(inputAlto);
+    
+                container.appendChild(oficinaDiv);
+                
+                event.preventDefault();
+            }
+        }
+    </script>
+
+</body>
+</html>
